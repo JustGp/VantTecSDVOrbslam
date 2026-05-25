@@ -21,6 +21,10 @@ find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(message_filters REQUIRED)
+find_package(nav_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
 
 # Find other dependencies
 find_package(Pangolin REQUIRED)
@@ -79,12 +83,11 @@ link_directories(
     ${ORB_SLAM3_ROOT_DIR}/Thirdparty/g2o/lib
 )
 
-# Mono executable
 add_executable(mono
     src/monocular/mono.cpp
     src/monocular/monocular-slam-node.cpp
 )
-ament_target_dependencies(mono rclcpp sensor_msgs cv_bridge Pangolin)
+ament_target_dependencies(mono rclcpp sensor_msgs cv_bridge Pangolin nav_msgs geometry_msgs tf2 tf2_geometry_msgs)
 target_link_libraries(mono ${OpenCV_LIBS} ORB_SLAM3)
 
 # RGBD executable
@@ -109,7 +112,7 @@ add_executable(stereo-inertial
     src/stereo-inertial/stereo-inertial-node.cpp
 )
 
-ament_target_dependencies(stereo-inertial rclcpp sensor_msgs cv_bridge Pangolin)
+ament_target_dependencies(stereo-inertial rclcpp sensor_msgs cv_bridge Pangolin nav_msgs geometry_msgs tf2 tf2_geometry_msgs)
 target_link_libraries(stereo-inertial ${OpenCV_LIBS} ORB_SLAM3)
 
 

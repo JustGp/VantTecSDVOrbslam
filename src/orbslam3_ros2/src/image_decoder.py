@@ -35,9 +35,9 @@ class MjpegViewer(Node):
             self.get_logger().warn("No se pudo decodificar el frame JPEG")
             return
 
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        resized = cv2.resize(gray, (320, 240), interpolation=cv2.INTER_AREA)
-        decoded = self.bridge.cv2_to_imgmsg(resized, encoding="mono8")
+        image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        #image = cv2.resize(image, (320, 240), interpolation=cv2.INTER_AREA)
+        decoded = self.bridge.cv2_to_imgmsg(image, encoding="mono8")
 
         current_stamp = msg.header.stamp
         if self._last_stamp is not None:

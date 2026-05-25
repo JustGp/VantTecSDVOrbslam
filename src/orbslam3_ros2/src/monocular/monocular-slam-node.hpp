@@ -5,6 +5,10 @@
 #include "sensor_msgs/msg/image.hpp"
 
 #include <cv_bridge/cv_bridge.h>
+#include "nav_msgs/msg/path.hpp"
+#include "geometry_msgs/msg/pose_stamped.hpp"
+#include <tf2/LinearMath/Matrix3x3.h>
+#include <tf2/LinearMath/Quaternion.h>
 
 #include "System.h"
 #include "Frame.h"
@@ -30,6 +34,9 @@ private:
     cv_bridge::CvImagePtr m_cvImPtr;
 
     rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr m_image_subscriber;
+
+    rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr m_path_publisher;
+    nav_msgs::msg::Path m_camera_path;
 };
 
 #endif
